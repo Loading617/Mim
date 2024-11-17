@@ -1,2 +1,2 @@
 # InControl
-Remote Control for IPTV Players
+Remote Control for IPTV Players for Windows
