@@ -1,2 +1,2 @@
 # Mim
-Remote Control for IPTV Players for Windows
+Channel Manager and Remote Control for IPTV Players for Windows
