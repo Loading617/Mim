@@ -1,7 +1,9 @@
 import customtkinter as ctk
 
-root = ctk.CTk()
-root.title("Mim")
+app = ctk.CTk()
+
+app.title("Mim")
+app.geometry("440x620")
 
 tab_frame = ctk.CTkFrame(app)
 tab_frame.pack(side="top", fill="x")
@@ -21,6 +23,14 @@ tab4_btn.pack(side="left", padx=10, pady=5)
 tab5_btn.pack(side="left", padx=10, pady=5)
 tab6_btn.pack(side="left", padx=10, pady=5)
 tab7_btn.pack(side="left", padx=10, pady=5)
+
+tab1_frame = ctk.CTkFrame(app)
+tab2_frame = ctk.CTkFrame(app)
+tab3_frame = ctk.CTkFrame(app)
+tab4_frame = ctk.CTkFrame(app)
+tab5_frame = ctk.CTkFrame(app)
+tab6_frame = ctk.CTkFrame(app)
+tab7_frame = ctk.CTkFrame(app)
 
 tab1_frame.pack(fill="both", expand="true")
 tab2_frame.pack(fill="both", expand="true")
@@ -57,10 +67,8 @@ tab7_btn.configure(command=lambda: switch_tab(7))
 def disable_fullscreen():
     app.attributes("-fullscreen", False)
 
-root.geometry("440x620")
-
 tabview.set("Preferences")
 
 app.bind("<Escape>", lambda event: disable_fullscreen())
 
-root.mainloop()
+app.mainloop()
