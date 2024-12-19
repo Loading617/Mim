@@ -37,6 +37,7 @@ tab4_frame.pack_forget()
 tab5_frame.pack_forget()
 tab6_frame.pack_forget()
 tab7_frame.pack_forget()
+
 if tab == 1: tab1_frame.pack(fill="both", expand=True)
 elif tab == 2: tab2_frame.pack(fill="both", expand=True)
 elif tab == 3: tab3_frame.pack(fill="both", expand=True)
@@ -44,6 +45,14 @@ elif tab == 4: tab4_frame.pack(fill="both", expand=True)
 elif tab == 5: tab5_frame.pack(fill="both", expand=True)
 elif tab == 6: tab6_frame.pack(fill="both", expand=True)
 elif tab == 7: tab7_frame.pack(fill="both", expand=True)
+
+tab1_btn.configure(command=lambda: switch_tab(1))
+tab2_btn.configure(command=lambda: switch_tab(2))
+tab3_btn.configure(command=lambda: switch_tab(3))
+tab4_btn.configure(command=lambda: switch_tab(4))
+tab5_btn.configure(command=lambda: switch_tab(5))
+tab6_btn.configure(command=lambda: switch_tab(6))
+tab7_btn.configure(command=lambda: switch_tab(7))
 
 def disable_fullscreen():
     app.attributes("-fullscreen", False)
