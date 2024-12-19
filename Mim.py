@@ -8,16 +8,18 @@ def disable_fullscreen():
 
 root.geometry("440x620")
 
-tabView = ctk.CTkTabview(app)
-tabView.pack(padx=20, pady=20)
+tabview = ctk.CTkTabview(app, width=500, height=400)
+tabview.pack(pady=20, padx=20, fill="both", expand=True)
 
-tab1.add("Grid Browser")
-tab2.add("Channel Browser")
-tab3.add("Favourites")
-tab4.add("Preferences")
-tab5.add("Search")
-tab6.add("Remote")
-tab7.add("About")
+tab.add("Grid Browser")
+tab.add("Channel Browser")
+tab.add("Favourites")
+tab.add("Preferences")
+tab.add("Search")
+tab.add("Remote")
+tab.add("About")
+
+tabview.set("Preferences")
 
 app.bind("<Escape>", lambda event: disable_fullscreen())
 
