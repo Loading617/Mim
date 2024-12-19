@@ -48,13 +48,20 @@ tab5_frame.pack_forget()
 tab6_frame.pack_forget()
 tab7_frame.pack_forget()
 
-if tab == 1: tab1_frame.pack(fill="both", expand=True)
-elif tab == 2: tab2_frame.pack(fill="both", expand=True)
-elif tab == 3: tab3_frame.pack(fill="both", expand=True)
-elif tab == 4: tab4_frame.pack(fill="both", expand=True)
-elif tab == 5: tab5_frame.pack(fill="both", expand=True)
-elif tab == 6: tab6_frame.pack(fill="both", expand=True)
-elif tab == 7: tab7_frame.pack(fill="both", expand=True)
+if tab == 1: 
+    tab1_frame.pack(fill="both", expand=True)
+elif tab == 2: 
+    tab2_frame.pack(fill="both", expand=True)
+elif tab == 3: 
+    tab3_frame.pack(fill="both", expand=True)
+elif tab == 4: 
+    tab4_frame.pack(fill="both", expand=True)
+elif tab == 5: 
+    tab5_frame.pack(fill="both", expand=True)
+elif tab == 6: 
+    tab6_frame.pack(fill="both", expand=True)
+elif tab == 7: 
+    tab7_frame.pack(fill="both", expand=True)
 
 tab1_btn.configure(command=lambda: switch_tab(1))
 tab2_btn.configure(command=lambda: switch_tab(2))
