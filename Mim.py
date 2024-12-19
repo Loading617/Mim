@@ -5,7 +5,7 @@ root.title("Mim")
 
 root.geometry("440x620")
 
-tabView = customtkinter.CTkTabView(app)
+tabView = ctk.CTkTabView(app)
 tabView.pack(padx=20, pady=20)
 
 tab1.add("Grid Browser")
