@@ -3,6 +3,8 @@ import customtkinter as ctk
 root = ctk.CTk()
 root.title("Mim")
 
+app.resizable(False, False)
+
 app.attributes('-fullscreen', False)
 
 root.geometry("440x620")
