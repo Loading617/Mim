@@ -8,8 +8,8 @@ def disable_fullscreen():
 
 root.geometry("440x620")
 
-tabview = ctk.CTkTabview(app, width=500, height=400)
-tabview.pack(pady=20, padx=20, fill="both", expand=True)
+tabView = ctk.CTkTabview(app, width=500, height=400)
+tabView.pack(pady=20, padx=20, fill="both", expand=True)
 
 tab.add("Grid Browser")
 tab.add("Channel Browser")
