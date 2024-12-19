@@ -3,9 +3,8 @@ import customtkinter as ctk
 root = ctk.CTk()
 root.title("Mim")
 
-app.resizable(False, False)
-
-app.attributes('-fullscreen', False)
+def disable_fullscreen():
+    app.attributes("-fullscreen", False)
 
 root.geometry("440x620")
 
@@ -19,5 +18,7 @@ tab4.add("Preferences")
 tab5.add("Search")
 tab6.add("Remote")
 tab7.add("About")
+
+app.bind("<Escape>", lambda event: disable_fullscreen())
 
 root.mainloop()
