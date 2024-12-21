@@ -25,4 +25,6 @@ def disable_fullscreen():
 
 app.bind("<Escape>", lambda event: disable_fullscreen())
 
-app.mainloop()
+if __name__ == "__main__":
+    app = TabViewApp()
+    app.mainloop()
