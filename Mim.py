@@ -14,6 +14,7 @@ class MyTabView(customtkinter.CTkTabview):
         self.add("Remote")
         self.add("About")
 
+app.geometry("440x620")
         
 class App(customtkinter.Mim):
     def __init__(self):
