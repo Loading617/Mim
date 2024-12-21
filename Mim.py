@@ -1,24 +1,27 @@
 import customtkinter as ctk
 
-app = ctk.CTk()
+class TabViewApp(ctk.CTk):
+    def __init__(self):
+        super().__init__()
 
-app.title("Mim")
-app.geometry("440x620")
+        self.title("Mim")
+        self.geometry("440x620")
 
-tabview = ctk.CTkTabView(app)
+self.tab_view = ctk.CTkTabView(self)
+self.tab_view.pack(fill="both", expand=True, padx=20, pady=20)
 
-tabview.addTab("Grid Browser")
-tabview.addTab("Channel Browser")
-tabview.addTab("Favourites")
-tabview.addTab("Settings")
-tabview.addTab("Search")
-tabview.addTab("Remote")
-tabview.addTab("About")
+self.tab_view.add("Grid Browser")
+self.tab_view.add("Channel Browser")
+self.tab_view.add("Favourites")
+self.tab_view.add("Preferences")
+self.tab_view.add("Search")
+self.tab_view.add("Remote")
+self.tab_view.add("About")
+
+self.tab_view.set("Preferences")
 
 def disable_fullscreen():
     app.attributes("-fullscreen", False)
-
-tabview.set("Preferences")
 
 app.bind("<Escape>", lambda event: disable_fullscreen())
 
