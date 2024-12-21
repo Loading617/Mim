@@ -15,8 +15,6 @@ class MyTabView(customtkinter.CTkTabview):
         self.add("About")
 
         
-
-
 class App(customtkinter.Mim):
     def __init__(self):
         super().__init__()
