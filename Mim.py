@@ -1,10 +1,8 @@
 import customtkinter
 
-
 class MyTabView(customtkinter.CTkTabview):
     def __init__(self, master, **kwargs):
         super().__init__(master, **kwargs)
-
         
         self.add("Grid Browser")
         self.add("Channel Browser")
@@ -13,16 +11,16 @@ class MyTabView(customtkinter.CTkTabview):
         self.add("Search")
         self.add("Remote")
         self.add("About")
-
-app.geometry("440x620")
         
-class App(customtkinter.Mim):
+        
+class App(customtkinter.CTk):
+    
     def __init__(self):
         super().__init__()
 
+        self.title("Mim")
         self.tab_view = MyTabView(master=self)
         self.tab_view.grid(row=0, column=0, padx=20, pady=20)
-
 
 app = App()
 app.mainloop()
