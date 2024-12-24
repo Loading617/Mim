@@ -22,7 +22,6 @@ class App(customtkinter.CTk):
         self.title("Mim")
         self.geometry("530x620")
         self.tab_view = MyTabView(master=self)
-        self.set_tab("Preferences")
         self.tab_view.grid(row=0, column=0, pad=2, pady=2)
 
 app = App()
