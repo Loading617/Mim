@@ -19,10 +19,9 @@ class App(customtkinter.CTk):
         super().__init__()
 
         self.title("Mim")
-        self.geometry("440x620")
-        self.tabview.set("Preferences")
+        self.geometry("530x620")
         self.tab_view = MyTabView(master=self)
-        self.tab_view.grid(row=0, column=0, padx=20, pady=15)
+        self.tab_view.grid(row=0, column=0, padx=2, pady=2)
 
 app = App()
 app.mainloop()
