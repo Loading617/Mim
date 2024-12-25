@@ -6,6 +6,7 @@ class App(ctk.CTk):
         
         self.title("Mim")
         self.geometry("730x620")
+        
 
         self.tabview = ctk.CTkTabview(self)
         self.tabview.pack(padx=20, pady=20)
@@ -21,7 +22,13 @@ class App(ctk.CTk):
         ctk.CTkButton(self.tab4, text="Reset Preferences").pack()
 
         
-        self.tabview.set("Preferences")  
+        self.tabview.set("Preferences")
+        
+        def toggle_appearance_mode(): 
+            current_mode = ctk.get_appearance_mode() 
+            new_mode = "Dark" if current_mode == "Light" else "Light" 
+            ctk.set_appearance_mode(new_mode)
+        
 
 if __name__ == "__main__":
     app = App()
