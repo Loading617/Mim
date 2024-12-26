@@ -4,7 +4,6 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         
-        ctk.set_appearance_mode("dark")
         self.resizable(False, False)
         self.title("Mim")
         self.geometry("440x620")
@@ -21,6 +20,25 @@ class App(ctk.CTk):
         self.tab6 = self.tabview.add("Remote")
         self.tab7 = self.tabview.add("About")
         
+    
+    def Browse(self):
+        print("Browse")
+    
+    def Open(self):
+        print("Open")
+    
+    def Save(self):
+        print("Save")
+        
+    def Browse_Folder(self):
+        print("Browse Folder")
+        
+    def Reset_Preferences(self):
+        print("Reset Preferences")
+        
+        ctk.CTkButton(self.tab4, text="Browse", action="Open")
+        ctk.CTkButton(self.tab4, text="Save", action="Save").pack()
+        ctk.CTkButton(self.tab4, text="Browse", action="Browse for Folder").pack()
         ctk.CTkButton(self.tab4, text="Reset Preferences").pack()
 
         
