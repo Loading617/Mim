@@ -6,7 +6,7 @@ class App(ctk.CTk):
         
         self.resizable(False, False)
         self.title("Mim")
-        self.geometry("730x620")
+        self.geometry("440x620")
         
 
         self.tabview = ctk.CTkTabview(self)
