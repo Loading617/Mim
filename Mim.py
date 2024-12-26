@@ -3,7 +3,7 @@ import customtkinter as ctk
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-        
+        self.resizable(False, False)
         self.title("Mim")
         self.geometry("730x620")
         
@@ -25,7 +25,6 @@ class App(ctk.CTk):
         self.tabview.set("Preferences")
         
         ctk.set_appearance_mode("Dark")
-        
 
 if __name__ == "__main__":
     app = App()
