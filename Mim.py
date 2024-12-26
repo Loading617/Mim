@@ -24,10 +24,7 @@ class App(ctk.CTk):
         
         self.tabview.set("Preferences")
         
-        def toggle_appearance_mode(): 
-            current_mode = ctk.get_appearance_mode() 
-            new_mode = "Dark" if current_mode == "Light" else "Light" 
-            ctk.set_appearance_mode(new_mode)
+        ctk.set_appearance_mode("Dark")
         
 
 if __name__ == "__main__":
