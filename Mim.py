@@ -4,13 +4,14 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         
+        ctk.set_appearance_mode("dark")
         self.resizable(False, False)
         self.title("Mim")
         self.geometry("440x620")
         
 
         self.tabview = ctk.CTkTabview(self)
-        self.tabview.pack(padx=20, pady=20)
+        self.tabview.pack(padx=10, pady=10)
 
         self.tab1 = self.tabview.add("Grid Browser")
         self.tab2 = self.tabview.add("Channel Browser")
@@ -25,7 +26,6 @@ class App(ctk.CTk):
         
         self.tabview.set("Preferences")
         
-        ctk.set_appearance_mode("Dark")
 
 if __name__ == "__main__":
     app = App()
