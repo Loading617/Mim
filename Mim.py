@@ -7,15 +7,10 @@ class App(ctk.CTk):
         self.resizable(False, False)
         self.title("Mim")
         self.geometry("540x620")
-        self.grid_rowconfigure(0, weight=1)
-        self.grid_columnconfigure(0, weight=1)
-        self.my_frame = MyFrame(master=self)
-        self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        
         
 
         self.tabview = ctk.CTkTabview(self)
-        self.tabview.pack(padx=10, pady=10)
+        self.tabview.pack(padx=10, pady=10, fill="both", expand=True)
 
         self.tab1 = self.tabview.add("Grid Browser")
         self.tab2 = self.tabview.add("Channel Browser")
