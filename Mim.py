@@ -6,7 +6,12 @@ class App(ctk.CTk):
         
         self.resizable(False, False)
         self.title("Mim")
-        self.geometry("440x620")
+        self.geometry("540x620")
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+        self.my_frame = MyFrame(master=self)
+        self.my_frame.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        
         
 
         self.tabview = ctk.CTkTabview(self)
@@ -20,30 +25,8 @@ class App(ctk.CTk):
         self.tab6 = self.tabview.add("Remote")
         self.tab7 = self.tabview.add("About")
         
-    
-    def Browse(self):
-        print("Browse")
-    
-    def Open(self):
-        print("Open")
-    
-    def Save(self):
-        print("Save")
-        
-    def Browse_Folder(self):
-        print("Browse Folder")
-        
-    def Reset_Preferences(self):
-        print("Reset Preferences")
-        
-        ctk.CTkButton(self.tab4, text="Browse", action="Open")
-        ctk.CTkButton(self.tab4, text="Save", action="Save").pack()
-        ctk.CTkButton(self.tab4, text="Browse", action="Browse for Folder").pack()
-        ctk.CTkButton(self.tab4, text="Reset Preferences").pack()
 
-        
         self.tabview.set("Preferences")
-        
 
 if __name__ == "__main__":
     app = App()
