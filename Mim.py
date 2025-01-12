@@ -6,7 +6,7 @@ class App(ctk.CTk):
         
         self.resizable(False, False)
         self.title("Mim")
-        self.geometry("540x620")
+        self.geometry("440x620")
         
 
         self.tabview = ctk.CTkTabview(self)
@@ -20,8 +20,14 @@ class App(ctk.CTk):
         self.tab6 = self.tabview.add("Remote")
         self.tab7 = self.tabview.add("About")
         
-
         self.tabview.set("Preferences")
+        
+        buttons = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
+        
+        for text in buttons:
+            button = ctk.CTkButton(self.frame, text=text)
+            button.pack(side="left", padx=10)
+            
 
 if __name__ == "__main__":
     app = App()
