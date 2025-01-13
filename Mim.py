@@ -9,8 +9,8 @@ class App(ctk.CTk):
         self.geometry("440x620")
         
 
-        self.tabview = ctk.CTkTabview(self)
-        self.tabview.pack(padx=10, pady=10, fill="both", expand=True)
+        self.tabview = ctk.CTkTabview(master=self, width=400)
+        self.tabview.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
         self.tab1 = self.tabview.add("Grid Browser")
         self.tab2 = self.tabview.add("Channel Browser")
@@ -22,23 +22,20 @@ class App(ctk.CTk):
         
         self.tabview.set("Preferences")
         
-        for button in self.tabview._segmented_button._buttons_dict.values():
-            button.configure(width=100, height=50)
-        self.tab1_frame = self.tabview.tab("Grid Browser")
-        self.tab2_frame = self.tabview.tab("Channel Browser")
-        self.tab3_frame = self.tabview.tab("Favourites")
-        self.tab4_frame = self.tabview.tab("Preferences")
-        self.tab5_frame = self.tabview.tab("Search")
-        self.tab6_frame = self.tabview.tab("Remote")
-        self.tab7_frame = self.tabview.tab("About")
-        
-        self.tab1_frame.pack(padx=20, pady=20)
-        self.tab2_frame.pack(padx=20, pady=20)
-        self.tab3_frame.pack(padx=20, pady=20)
-        self.tab4_frame.pack(padx=20, pady=20)
-        self.tab5_frame.pack(padx=20, pady=20)
-        self.tab6_frame.pack(padx=20, pady=20)
-        self.tab7_frame.pack(padx=20, pady=20)
+        self.tabview.tab("Grid Browser").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("Grid Browser").grid_rowconfigure(0, weight=1)
+        self.tabview.tab("Channel Browser").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("Channel Browser").grid_rowconfigure(0, weight=1)
+        self.tabview.tab("Favourites").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("Favourites").grid_rowconfigure(0, weight=1)
+        self.tabview.tab("Preferences").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("Preferences").grid_rowconfigure(0, weight=1)
+        self.tabview.tab("Search").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("Search").grid_rowconfigure(0, weight=1)
+        self.tabview.tab("Remote").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("Remote").grid_rowconfigure(0, weight=1)
+        self.tabview.tab("About").grid_columnconfigure(0, weight=1)
+        self.tabview.tab("About").grid_rowconfigure(0, weight=1)
 
 if __name__ == "__main__":
     app = App()
