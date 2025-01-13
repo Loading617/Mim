@@ -19,15 +19,6 @@ class App(ctk.CTk):
         self.tab5 = self.tabview.add("Search")
         self.tab6 = self.tabview.add("Remote")
         self.tab7 = self.tabview.add("About")
-        
-        self.tabview.set("Preferences")
-        
-        buttons = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
-        
-    for i, text in enumerate(buttons):
-    button = ctk.CTkButton(app, text=text)
-    button.grid(row=0, column=i, padx=10, pady=10)
-            
 
 if __name__ == "__main__":
     app = App()
