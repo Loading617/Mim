@@ -24,9 +24,9 @@ class App(ctk.CTk):
         
         buttons = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
         
-        for text in buttons:
-            button = ctk.CTkButton(self.frame, text=text)
-            button.pack(side="left", padx=10)
+        for i, text in enumerate(buttons):
+    button = ctk.CTkButton(app, text=text)
+    button.grid(row=0, column=i, padx=10, pady=10)
             
 
 if __name__ == "__main__":
