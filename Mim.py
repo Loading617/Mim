@@ -24,7 +24,7 @@ class App(ctk.CTk):
         
         buttons = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
         
-        for i, text in enumerate(buttons):
+    for i, text in enumerate(buttons):
     button = ctk.CTkButton(app, text=text)
     button.grid(row=0, column=i, padx=10, pady=10)
             
