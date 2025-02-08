@@ -22,20 +22,6 @@ class App(ctk.CTk):
         
         self.tabview.set("Preferences")
         
-        self.tabview.tab("Grid Browser").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("Grid Browser").grid_rowconfigure(0, weight=1)
-        self.tabview.tab("Channel Browser").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("Channel Browser").grid_rowconfigure(0, weight=1)
-        self.tabview.tab("Favourites").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("Favourites").grid_rowconfigure(0, weight=1)
-        self.tabview.tab("Preferences").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("Preferences").grid_rowconfigure(0, weight=1)
-        self.tabview.tab("Search").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("Search").grid_rowconfigure(0, weight=1)
-        self.tabview.tab("Remote").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("Remote").grid_rowconfigure(0, weight=1)
-        self.tabview.tab("About").grid_columnconfigure(0, weight=1)
-        self.tabview.tab("About").grid_rowconfigure(0, weight=1)
 
 if __name__ == "__main__":
     app = App()
