@@ -9,8 +9,9 @@ class App(ctk.CTk):
         self.geometry("440x620")
         
 
-        self.tabview = ctk.CTkTabview(master=self, width=400)
-        self.tabview.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
 
         self.tab1 = self.tabview.add("Grid Browser")
         self.tab2 = self.tabview.add("Channel Browser")
@@ -22,6 +23,12 @@ class App(ctk.CTk):
         
         self.tabview.set("Preferences")
         
+        for tab in self.tabview.tabs.values():
+            tab.grid_rowconfigure(0, weight=1)
+            tab.grid_columnconfigure(0, weight=1)
+        
+        self.tabview = ctk.CTkTabview(self)
+        self.tabview.grid(row=0, column=0, sticky="nsew")
 
 if __name__ == "__main__":
     app = App()
