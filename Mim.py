@@ -1,5 +1,7 @@
 import customtkinter as ctk
 
+ctk.set_appearance_mode("System")
+
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
