@@ -1,13 +1,12 @@
 import customtkinter as ctk
 
-ctk.set_appearance_mode("System")
-
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         
         self.resizable(False, False)
         self.title("Mim")
+        self.iconbitmap("Mim.ico")
         self.geometry("440x620")
 
         self.tab1 = self.tabview.add("Grid Browser")
