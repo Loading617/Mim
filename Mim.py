@@ -14,9 +14,6 @@ tabview.pack(pady=10, padx=10, fill="both", expand=True)
 tabs = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
 for tab_name in tabs:
     tabview.add(tab_name)
-    label = ctk.CTkLabel(tabview.tab(tab_name), text=f"Content for {tab_name}", font=("Arial", 16))
-    label.pack(pady=20)
-
 
 tabview.set("Preferences")
 
