@@ -1,22 +1,20 @@
 import customtkinter as ctk
 
-ctk.set_appearance_mode("dark")
+ctk.set_appearance_mode("System")
+ctk.set_default_color_theme("blue")
 
-app = ctk.CTk()
+root = ctk.CTk()
+root.geometry("440x620")
+root.title("Mim")
 
-app.resizable(False, False)
-app.title("Mim")
-app.geometry("440x620")
+tabview = ctk.CTkTabview(root, width=420, height=580)
+tabview.pack(pady=10, padx=10, fill="both", expand=True)
 
-tabview = ctk.CTkTabview(app)
-tabview.pack(pady=20, padx=20, fill="both", expand=True)
+tabs = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
+for tab_name in tabs:
+    tabview.add(tab_name)
 
-tab1 = tabview.add("                Grid Browser                ")
-tab2 = tabview.add("                Channel Browser                ")
-tab3 = tabview.add("                Favourites                ")
-tab4 = tabview.add("                Pref                ")
-tab5 = tabview.add("               Search            ")
-tab6 = tabview.add("              Remote          ")
-tab7 = tabview.add("              About          ")
+style = tabview._segmented_button
+style.configure(font=("Verdana", 8))
 
-app.mainloop()
+root.mainloop()
