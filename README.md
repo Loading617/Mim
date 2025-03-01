@@ -3,4 +3,5 @@
 </p>
 
 # Mim
-Channel Manager and Remote Control for IPTV Players for Windows
+Channel Manager and Remote Control for IPTV Players for Windows 
+Also, this is a reissue of VishuTV!
