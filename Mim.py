@@ -34,4 +34,7 @@ for row in range(4):
         label = ctk.CTkLabel(tab3)
         label.grid(row=row, column=col, padx=10, pady=10)
 
+label = ctk.CTkLabel(tab4, text="Player Location")
+label.pack(padx=10, pady=10)
+
 root.mainloop()
