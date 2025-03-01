@@ -19,4 +19,19 @@ tabview.set("Preferences")
 
 tabview._segmented_button.configure(font=("Verdana", 8))
 
+for row in range(3):
+    for col in range(3):
+        label = ctk.CTkLabel(tab1)
+        label.grid(row=row, column=col, padx=10, pady=10)
+
+for row in range(2):
+    for col in range(2):
+        label = ctk.CTkLabel(tab2)
+        label.grid(row=row, column=col, padx=10, pady=10)
+
+for row in range(4):
+    for col in range(2):
+        label = ctk.CTkLabel(tab3)
+        label.grid(row=row, column=col, padx=10, pady=10)
+
 root.mainloop()
