@@ -1,4 +1,5 @@
 import customtkinter as ctk
+from tkinter import filedialog
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -16,25 +17,73 @@ for tab_name in tabs:
     tabview.add(tab_name)
 
 tabview.set("Preferences")
-
 tabview._segmented_button.configure(font=("Verdana", 8))
 
-for row in range(3):
-    for col in range(3):
-        label = ctk.CTkLabel(tab1)
-        label.grid(row=row, column=col, padx=10, pady=10)
+preferences_tab = tabview.tab("Preferences")
 
-for row in range(2):
-    for col in range(2):
-        label = ctk.CTkLabel(tab2)
-        label.grid(row=row, column=col, padx=10, pady=10)
+def browse_application():
+    file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
+    if file_path:
+        entry_player_location.delete(0, ctk.END)
+        entry_player_location.insert(0, file_path)
 
-for row in range(4):
-    for col in range(2):
-        label = ctk.CTkLabel(tab3)
-        label.grid(row=row, column=col, padx=10, pady=10)
+def browse_folder():
+    folder_path = filedialog.askdirectory()
+    if folder_path:
+        entry_list_hierarchy.delete(0, ctk.END)
+        entry_list_hierarchy.insert(0, folder_path)
 
-label = ctk.CTkLabel(tab4, text="Player Location")
-label.pack(padx=10, pady=10)
+def save_preferences():
+    print("Preferences Saved!")
+    print("Player Location:", entry_player_location.get())
+    print("Player Parameters:", entry_player_parameters.get())
+    print("List Hierarchy:", entry_list_hierarchy.get())
+    print("Show Window on Top:", check_var_top.get())
+    print("Start Mim with Remote:", check_var_remote.get())
+
+def reset_preferences():
+    entry_player_location.delete(0, ctk.END)
+    entry_player_parameters.delete(0, ctk.END)
+    entry_list_hierarchy.delete(0, ctk.END)
+    check_var_top.set(0)
+    check_var_remote.set(0)
+
+preferences_tab.columnconfigure(0, weight=1)
+preferences_tab.columnconfigure(1, weight=1)
+preferences_tab.columnconfigure(2, weight=1)
+
+label_player_location = ctk.CTkLabel(preferences_tab, text="Player Location:")
+label_player_location.grid(row=0, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
+entry_player_location = ctk.CTkEntry(preferences_tab)
+entry_player_location.grid(row=1, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
+browse_button1 = ctk.CTkButton(preferences_tab, text="Browse", command=browse_application)
+browse_button1.grid(row=1, column=2, padx=10, pady=5, sticky="ew")
+
+label_player_parameters = ctk.CTkLabel(preferences_tab, text="Player Parameters:")
+label_player_parameters.grid(row=2, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
+entry_player_parameters = ctk.CTkEntry(preferences_tab)
+entry_player_parameters.grid(row=3, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
+save_button = ctk.CTkButton(preferences_tab, text="Save", command=save_preferences)
+save_button.grid(row=3, column=2, padx=10, pady=5, sticky="ew")
+
+label_list_hierarchy = ctk.CTkLabel(preferences_tab, text="List Hierarchy:")
+label_list_hierarchy.grid(row=4, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
+entry_list_hierarchy = ctk.CTkEntry(preferences_tab)
+entry_list_hierarchy.grid(row=5, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
+browse_button2 = ctk.CTkButton(preferences_tab, text="Browse", command=browse_folder)
+browse_button2.grid(row=5, column=2, padx=10, pady=5, sticky="ew")
+
+check_var_top = ctk.IntVar()
+checkbox_top = ctk.CTkCheckBox(preferences_tab, text="Show Window on Top", variable=check_var_top)
+checkbox_top.grid(row=6, column=0, columnspan=3, padx=10, pady=5, sticky="w")
+
+check_var_remote = ctk.IntVar()
+checkbox_remote = ctk.CTkCheckBox(preferences_tab, text="Start Mim with Remote", variable=check_var_remote)
+checkbox_remote.grid(row=7, column=0, columnspan=3, padx=10, pady=5, sticky="w")
+
+preferences_tab.rowconfigure(8, weight=1)
+
+reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_color="red", hover_color="darkred", command=reset_preferences)
+reset_button.grid(row=9, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
 root.mainloop()
