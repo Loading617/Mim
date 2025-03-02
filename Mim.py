@@ -38,6 +38,7 @@ def save_preferences():
     print("Player Location:", entry_player_location.get())
     print("Player Parameters:", entry_player_parameters.get())
     print("List Hierarchy:", entry_list_hierarchy.get())
+    print("List URL:", entry_list_url.get())
     print("Show Window on Top:", check_var_top.get())
     print("Start Mim with Remote:", check_var_remote.get())
 
@@ -45,8 +46,15 @@ def reset_preferences():
     entry_player_location.delete(0, ctk.END)
     entry_player_parameters.delete(0, ctk.END)
     entry_list_hierarchy.delete(0, ctk.END)
+    entry_list_url.delete(0, ctk.END)
     check_var_top.set(0)
     check_var_remote.set(0)
+
+def add_url():
+    url = entry_list_url.get()
+    if url:
+        print(f"Added URL: {url}")
+        entry_list_url.delete(0, ctk.END)
 
 preferences_tab.columnconfigure(0, weight=1)
 preferences_tab.columnconfigure(1, weight=1)
@@ -73,31 +81,24 @@ entry_list_hierarchy.grid(row=5, column=0, padx=10, pady=5, columnspan=2, sticky
 browse_button2 = ctk.CTkButton(preferences_tab, text="Browse", command=browse_folder)
 browse_button2.grid(row=5, column=2, padx=10, pady=5, sticky="ew")
 
+label_list_url = ctk.CTkLabel(preferences_tab, text="List URL:")
+label_list_url.grid(row=6, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
+entry_list_url = ctk.CTkEntry(preferences_tab)
+entry_list_url.grid(row=7, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
+add_button = ctk.CTkButton(preferences_tab, text="Add", command=add_url)
+add_button.grid(row=7, column=2, padx=10, pady=5, sticky="ew")
+
 check_var_top = ctk.IntVar()
 checkbox_top = ctk.CTkCheckBox(preferences_tab, text="Show Window on Top", variable=check_var_top)
-checkbox_top.grid(row=6, column=0, columnspan=3, padx=10, pady=5, sticky="w")
+checkbox_top.grid(row=8, column=0, columnspan=3, padx=10, pady=5, sticky="w")
 
 check_var_remote = ctk.IntVar()
 checkbox_remote = ctk.CTkCheckBox(preferences_tab, text="Start Mim with Remote", variable=check_var_remote)
-checkbox_remote.grid(row=7, column=0, columnspan=3, padx=10, pady=5, sticky="w")
+checkbox_remote.grid(row=9, column=0, columnspan=3, padx=10, pady=5, sticky="w")
 
-preferences_tab.rowconfigure(8, weight=1)
+preferences_tab.rowconfigure(10, weight=1)
 
 reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_color="red", hover_color="darkred", command=reset_preferences)
-reset_button.grid(row=9, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
-
-class Remote(ctk.CTkFrame):
-    def __init__(self, parent):
-        super().__init__(parent)
-        self.pack(fill="both", expand=True)
-        
-        self.open_remote_button = ctk.CTkButton(self, text="Open Remote", command=self.open_remote)
-        self.open_remote_button.pack(pady=5)
-
-    def open_remote(self):
-        print("Open Remote Command Executed!")
-
-remote_tab = tabview.tab("Remote")
-Remote(remote_tab)
+reset_button.grid(row=11, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
 root.mainloop()
