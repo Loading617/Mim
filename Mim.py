@@ -86,4 +86,49 @@ preferences_tab.rowconfigure(8, weight=1)
 reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_color="red", hover_color="darkred", command=reset_preferences)
 reset_button.grid(row=9, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
+class ChannelFavoritesRemote(ctk.CTkFrame):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.pack(fill="both", expand=True)
+        
+        self.channel_list = []
+        
+        self.channel_label = ctk.CTkLabel(self, text="Current Channel: None", font=("Arial", 16))
+        self.channel_label.pack(pady=10)
+        
+        self.entry = ctk.CTkEntry(self, placeholder_text="Enter Channel Name")
+        self.entry.pack(pady=5)
+        
+        self.add_button = ctk.CTkButton(self, text="Add to Favorites", command=self.add_channel)
+        self.add_button.pack(pady=5)
+        
+        self.listbox = ctk.CTkComboBox(self, values=self.channel_list, command=self.change_channel)
+        self.listbox.pack(pady=5)
+        
+        self.remove_button = ctk.CTkButton(self, text="Remove Selected", command=self.remove_channel)
+        self.remove_button.pack(pady=5)
+    
+    def add_channel(self):
+        channel = self.entry.get()
+        if channel and channel not in self.channel_list:
+            self.channel_list.append(channel)
+            self.listbox.configure(values=self.channel_list)
+            self.entry.delete(0, 'end')
+    
+    def change_channel(self, selection):
+        self.channel_label.configure(text=f"Current Channel: {selection}")
+    
+    def remove_channel(self):
+        selected = self.listbox.get()
+        if selected in self.channel_list:
+            self.channel_list.remove(selected)
+            self.listbox.configure(values=self.channel_list)
+            if self.channel_list:
+                self.channel_label.configure(text=f"Current Channel: {self.channel_list[0]}")
+            else:
+                self.channel_label.configure(text="Current Channel: None")
+
+remote_tab = tabview.tab("Remote")
+ChannelFavoritesRemote(remote_tab)
+
 root.mainloop()
