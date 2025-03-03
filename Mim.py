@@ -100,7 +100,7 @@ add_button = ctk.CTkButton(preferences_tab, text="Add", command=add_url)
 add_button.grid(row=7, column=2, padx=10, pady=5, sticky="ew")
 
 entry_list_url.bind("<Control-v>", on_paste)
-entry_list_url.bind("<Button-3>", on_paste)
+entry_list_url.bind("<Button-2>", on_paste)
 
 label_switches = ctk.CTkLabel(preferences_tab, text="Toggle URL List:")
 label_switches.grid(row=8, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
