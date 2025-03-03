@@ -41,6 +41,8 @@ def save_preferences():
     print("List URL:", entry_list_url.get())
     print("Show Window on Top:", check_var_top.get())
     print("Start Mim with Remote:", check_var_remote.get())
+    for switch in switch_list:
+        print(f"{switch.cget('text')}: {'ON' if switch.get() else 'OFF'}")
 
 def reset_preferences():
     entry_player_location.delete(0, ctk.END)
@@ -49,11 +51,16 @@ def reset_preferences():
     entry_list_url.delete(0, ctk.END)
     check_var_top.set(0)
     check_var_remote.set(0)
+    for switch in switch_list:
+        switch.destroy()
+    switch_list.clear()
 
 def add_url():
     url = entry_list_url.get()
     if url:
-        print(f"Added URL: {url}")
+        new_switch = ctk.CTkSwitch(switch_frame, text=url)
+        new_switch.pack(pady=2, padx=5, anchor="w")
+        switch_list.append(new_switch)
         entry_list_url.delete(0, ctk.END)
 
 preferences_tab.columnconfigure(0, weight=1)
@@ -88,17 +95,25 @@ entry_list_url.grid(row=7, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
 add_button = ctk.CTkButton(preferences_tab, text="Add", command=add_url)
 add_button.grid(row=7, column=2, padx=10, pady=5, sticky="ew")
 
+label_switches = ctk.CTkLabel(preferences_tab, text="Toggle URL List:")
+label_switches.grid(row=8, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
+
+switch_frame = ctk.CTkFrame(preferences_tab, fg_color="transparent")
+switch_frame.grid(row=9, column=0, columnspan=3, padx=10, pady=5, sticky="ew")
+
+switch_list = []
+
 check_var_top = ctk.IntVar()
 checkbox_top = ctk.CTkCheckBox(preferences_tab, text="Show Window on Top", variable=check_var_top)
-checkbox_top.grid(row=8, column=0, columnspan=3, padx=10, pady=5, sticky="w")
+checkbox_top.grid(row=10, column=0, columnspan=3, padx=10, pady=5, sticky="w")
 
 check_var_remote = ctk.IntVar()
 checkbox_remote = ctk.CTkCheckBox(preferences_tab, text="Start Mim with Remote", variable=check_var_remote)
-checkbox_remote.grid(row=9, column=0, columnspan=3, padx=10, pady=5, sticky="w")
+checkbox_remote.grid(row=11, column=0, columnspan=3, padx=10, pady=5, sticky="w")
 
-preferences_tab.rowconfigure(10, weight=1)
+preferences_tab.rowconfigure(12, weight=1)
 
 reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_color="red", hover_color="darkred", command=reset_preferences)
-reset_button.grid(row=11, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
+reset_button.grid(row=13, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
 root.mainloop()
