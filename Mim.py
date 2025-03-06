@@ -21,6 +21,22 @@ tabview._segmented_button.configure(font=("Verdana", 8))
 
 preferences_tab = tabview.tab("Preferences")
 remote_tab = tabview.tab("Remote")
+search_tab = tabview.tab("Search")
+
+search_tab.columnconfigure(0, weight=1)
+search_tab.rowconfigure(0, weight=1)
+
+search_frame = ctk.CTkFrame(search_tab)
+search_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+grid_view = ctk.CTkFrame(search_frame)
+grid_view.pack(fill="both", expand=True, pady=(0, 10))
+
+search_entry = ctk.CTkEntry(search_frame, placeholder_text="Search")
+search_entry.pack(side="left", fill="x", expand=True, padx=(0, 10))
+
+search_button = ctk.CTkButton(search_frame, text="Search")
+search_button.pack(side="right")
 
 def browse_application():
     file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
@@ -89,27 +105,6 @@ entry_list_hierarchy = ctk.CTkEntry(preferences_tab)
 entry_list_hierarchy.grid(row=5, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
 browse_button2 = ctk.CTkButton(preferences_tab, text="Browse", command=browse_folder)
 browse_button2.grid(row=5, column=2, padx=10, pady=5, sticky="ew")
-
-label_list_url = ctk.CTkLabel(preferences_tab, text="List URL:")
-label_list_url.grid(row=6, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
-entry_list_url = ctk.CTkEntry(preferences_tab)
-entry_list_url.grid(row=7, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
-add_button = ctk.CTkButton(preferences_tab, text="Add", command=add_url)
-add_button.grid(row=7, column=2, padx=10, pady=5, sticky="ew")
-
-scrollable_frame = ctk.CTkScrollableFrame(preferences_tab, width=400, height=200)
-scrollable_frame.grid(row=8, column=0, columnspan=3, padx=10, pady=10, sticky="nsew")
-
-check_var_top = ctk.IntVar()
-checkbox_top = ctk.CTkCheckBox(preferences_tab, text="Show Window on Top", variable=check_var_top)
-checkbox_top.grid(row=9, column=0, columnspan=3, padx=10, pady=5, sticky="w")
-
-check_var_remote = ctk.IntVar()
-checkbox_remote = ctk.CTkCheckBox(preferences_tab, text="Start Mim with Remote", variable=check_var_remote)
-checkbox_remote.grid(row=10, column=0, columnspan=3, padx=10, pady=5, sticky="w")
-
-reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_color="red", hover_color="darkred", command=reset_preferences)
-reset_button.grid(row=11, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
 preferences_tab.rowconfigure(8, weight=1)
 
