@@ -20,6 +20,7 @@ tabview.set("Preferences")
 tabview._segmented_button.configure(font=("Verdana", 8))
 
 preferences_tab = tabview.tab("Preferences")
+remote_tab = tabview.tab("Remote")
 
 def browse_application():
     file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
@@ -60,6 +61,9 @@ def add_url():
         new_checkbox = ctk.CTkCheckBox(scrollable_frame, text=url)
         new_checkbox.pack(anchor="w", padx=5, pady=2)
         entry_list_url.delete(0, ctk.END)
+
+def open_remote():
+    print("Remote Opened!")
 
 preferences_tab.columnconfigure(0, weight=1)
 preferences_tab.columnconfigure(1, weight=1)
@@ -108,5 +112,9 @@ reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_c
 reset_button.grid(row=11, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
 preferences_tab.rowconfigure(8, weight=1)
+
+remote_tab.columnconfigure(0, weight=1)
+open_remote_button = ctk.CTkButton(remote_tab, text="Open Remote", command=open_remote)
+open_remote_button.pack(pady=20)
 
 root.mainloop()
