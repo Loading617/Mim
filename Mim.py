@@ -137,7 +137,7 @@ search_button.pack(side="left", padx=5)
 
 for row in range(6):
     for col in range(6):
-        label = ctk.CTkLabel(grid_frame, text=f"Item {row},{col}", padx=10, pady=5)
+        label = ctk.CTkLabel(grid_frame, text=f"", padx=10, pady=5)
         label.grid(row=row, column=col, padx=5, pady=5)
 
 root.mainloop()
