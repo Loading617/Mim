@@ -1,4 +1,4 @@
-import customtkinter as ctk 
+import customtkinter as ctk
 from tkinter import filedialog
 
 ctk.set_appearance_mode("System")
@@ -21,6 +21,7 @@ tabview._segmented_button.configure(font=("Verdana", 8))
 
 preferences_tab = tabview.tab("Preferences")
 remote_tab = tabview.tab("Remote")
+search_tab = tabview.tab("Search")
 
 def browse_application():
     file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
@@ -115,5 +116,28 @@ preferences_tab.rowconfigure(8, weight=1)
 remote_tab.columnconfigure(0, weight=1)
 open_remote_button = ctk.CTkButton(remote_tab, text="Open Remote", command=open_remote)
 open_remote_button.pack(pady=20)
+
+search_tab.columnconfigure(0, weight=1)
+
+grid_frame = ctk.CTkFrame(search_tab)
+grid_frame.pack(expand=True, fill="both", padx=10, pady=10)
+
+search_frame = ctk.CTkFrame(search_tab)
+search_frame.pack(side="bottom", fill="x", padx=10, pady=5)
+
+search_entry = ctk.CTkEntry(search_frame, placeholder_text="Search")
+search_entry.pack(side="left", expand=True, fill="x", padx=5)
+
+def search_action():
+    query = search_entry.get()
+    print(f"Searching for: {query}")
+
+search_button = ctk.CTkButton(search_frame, text="Search", command=search_action)
+search_button.pack(side="left", padx=5)
+
+for row in range(6):
+    for col in range(6):
+        label = ctk.CTkLabel(grid_frame, text=f"Item {row},{col}", padx=10, pady=5)
+        label.grid(row=row, column=col, padx=5, pady=5)
 
 root.mainloop()
