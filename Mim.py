@@ -40,7 +40,7 @@ def save_preferences():
     print("Preferences Saved!")
     print("Player Location:", entry_player_location.get())
     print("Player Parameters:", entry_player_parameters.get())
-    print("List Hierarchy:", entry_list_hierarchy.get())
+    print("File Hierarchy:", entry_list_hierarchy.get())
     print("List URL:", entry_list_url.get())
     print("Show Window on Top:", check_var_top.get())
     print("Start Mim with Remote:", check_var_remote.get())
@@ -84,7 +84,7 @@ entry_player_parameters.grid(row=3, column=0, padx=10, pady=5, columnspan=2, sti
 save_button = ctk.CTkButton(preferences_tab, text="Save", command=save_preferences)
 save_button.grid(row=3, column=2, padx=10, pady=5, sticky="ew")
 
-label_list_hierarchy = ctk.CTkLabel(preferences_tab, text="List Hierarchy:")
+label_list_hierarchy = ctk.CTkLabel(preferences_tab, text="File Hierarchy:")
 label_list_hierarchy.grid(row=4, column=0, padx=10, pady=(10, 0), columnspan=3, sticky="w")
 entry_list_hierarchy = ctk.CTkEntry(preferences_tab, width=300)
 entry_list_hierarchy.grid(row=5, column=0, padx=10, pady=5, columnspan=2, sticky="ew")
