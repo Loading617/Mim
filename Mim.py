@@ -4,12 +4,12 @@ from tkinter import filedialog
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
 
-root = ctk.CTk()
-root.geometry("440x620")
-root.title("Mim")
-root.resizable(False, False)
+app = ctk.CTk()
+app.title("Mim")
+app.geometry("440x620")
+app.resizable(False, False)
 
-tabview = ctk.CTkTabview(root, width=420, height=580)
+tabview = ctk.CTkTabview(app, width=420, height=580)
 tabview.pack(pady=10, padx=10, fill="both", expand=True)
 
 tabs = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
@@ -22,6 +22,7 @@ tabview._segmented_button.configure(font=("Verdana", 8))
 preferences_tab = tabview.tab("Preferences")
 remote_tab = tabview.tab("Remote")
 search_tab = tabview.tab("Search")
+grid_browser_tab = tabview.tab("Grid Browser")
 
 def browse_application():
     file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
@@ -140,4 +141,18 @@ for row in range(6):
         label = ctk.CTkLabel(grid_frame, text=f"", padx=10, pady=5)
         label.grid(row=row, column=col, padx=5, pady=5)
 
-root.mainloop()
+grid_browser_tab = tabview.tab("Grid Browser")
+
+grid_browser_frame = ctk.CTkFrame(grid_browser_tab)
+grid_browser_frame.pack(pady=10, padx=10, fill="both", expand=True)
+
+bottom_frame = ctk.CTkFrame(grid_browser_tab)
+bottom_frame.pack(pady=10, padx=10, fill="x", side="bottom")
+
+query_label = ctk.CTkLabel(bottom_frame, text="Query")
+query_label.pack(side="left", padx=5)
+
+query_entry = ctk.CTkEntry(bottom_frame)
+query_entry.pack(side="left", padx=5, fill="x", expand=True)
+
+app.mainloop()
