@@ -177,6 +177,21 @@ def add_url():
             for widget in grid_browser_frame.winfo_children():
                 widget.destroy()
 
+downloads_path = os.path.join(os.path.expanduser("~"), "Downloads")
+
+mim_folder = os.path.join(downloads_path, "MimData")
+
+if not os.path.exists(mim_folder):
+    os.makedirs(mim_folder)
+
+favourites_file = os.path.join(mim_folder, "favourites.mim")
+
+if not os.path.exists(favourites_file):
+    with open(favourites_file, "w", encoding="utf-8") as file:
+        file.write("# Favourites List\n")
+
+print(f"Favourites file created at: {favourites_file}")
+
 def open_remote():
     print("Remote Opened!")
 
