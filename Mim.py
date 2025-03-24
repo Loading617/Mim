@@ -158,6 +158,25 @@ def load_m3u_channels(file_path):
     except Exception as e:
         print("Error loading M3U file:", e)
 
+def add_url():
+    """Handles adding an M3U/M3U8 URL with a checkbox to enable/disable channels."""
+    url = entry_list_url.get().strip()
+    if not url:
+        return
+
+    check_var = ctk.IntVar()
+
+    def toggle_channels():
+        """Add or remove channels based on the checkbox state."""
+        if check_var.get():
+            content = fetch_m3u(url)
+            if content:
+                channels = parse_m3u(content)
+                update_grid_browser(channels)
+        else:
+            for widget in grid_browser_frame.winfo_children():
+                widget.destroy()
+
 def open_remote():
     print("Remote Opened!")
 
