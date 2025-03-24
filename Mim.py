@@ -1,4 +1,7 @@
 import customtkinter as ctk
+import requests
+import re
+import os
 from tkinter import filedialog
 
 ctk.set_appearance_mode("System")
@@ -64,6 +67,86 @@ def add_url():
         new_checkbox = ctk.CTkCheckBox(scrollable_frame, text=url)
         new_checkbox.pack(anchor="w", padx=5, pady=2)
         entry_list_url.delete(0, ctk.END)
+
+def fetch_m3u(url):
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()
+        return response.text
+    except requests.exceptions.RequestException as e:
+        print(f"Failed to fetch M3U file: {e}")
+        return None
+
+def parse_m3u(content):
+    """Extracts channel names and URLs from M3U content."""
+    channels = []
+    lines = content.splitlines()
+    current_name = None
+
+    for line in lines:
+        line = line.strip()
+        if line.startswith("#EXTINF"):
+            match = re.search(r'?,(.*)', line)
+            if match:
+                current_name = match.group(1)
+        elif line and not line.startswith("#"):
+            if current_name:
+                channels.append((current_name, line))
+                current_name = None
+    
+    return channels
+
+def update_grid_browser(channels):
+    """Update Grid Browser with channel names."""
+    for widget in grid_browser_frame.winfo_children():
+        widget.destroy()
+    
+    row, col = 0, 0
+    for name, url in channels:
+        label = ctk.CTkLabel(grid_browser_frame, text=name, padx=10, pady=5, fg_color="gray30")
+        label.grid(row=row, column=col, padx=5, pady=5)
+        
+        col += 1
+        if col >= 3:
+            col = 0
+            row += 1
+
+def add_url(url):
+    """Handles adding an M3U/M3U8 URL."""
+    content = fetch_m3u(url)
+    if content:
+        channels = parse_m3u(content)
+        update_grid_browser(channels)
+        
+def browse_folder():
+    file_path = filedialog.askopenfilename(filetypes=[("M3U Playlist", "*.m3u"), ("M3U8 Playlist", "*.m3u8")])
+    if file_path:
+        entry_list_hierarchy.delete(0, ctk.END)
+        entry_list_hierarchy.insert(0, file_path)
+        load_m3u_channels(file_path)
+
+def load_m3u_channels(file_path):
+    """Read M3U/M3U8 file and display URLs in the grid view."""
+    for widget in grid_browser_frame.winfo_children():
+        widget.destroy()
+
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            lines = file.readlines()
+
+        urls = [line.strip() for line in lines if line.strip() and not line.startswith("#")]
+
+        row, col = 0, 0
+        for url in urls:
+            label = ctk.CTkLabel(grid_browser_frame, text=url, padx=5, pady=5, fg_color="gray30", corner_radius=5)
+            label.grid(row=row, column=col, padx=5, pady=5, sticky="ew")
+            col += 1
+            if col >= 3:
+                col = 0
+                row += 1
+
+    except Exception as e:
+        print("Error loading M3U file:", e)
 
 def open_remote():
     print("Remote Opened!")
