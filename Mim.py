@@ -61,6 +61,16 @@ def reset_preferences():
     for widget in scrollable_frame.winfo_children():
         widget.destroy()
 
+def confirm_reset_preferences():
+    """Show a confirmation dialog before resetting preferences."""
+    if (entry_player_location.get() or entry_player_parameters.get() or 
+        entry_list_hierarchy.get() or entry_list_url.get()):
+        warning = messagebox.askquestion("Confirm Reset", "⚠️ Are you sure?", icon="warning")
+        if warning == "yes":
+            reset_preferences()
+    else:
+        reset_preferences()
+
 def add_url():
     url = entry_list_url.get().strip()
     if url:
