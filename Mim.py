@@ -23,6 +23,8 @@ preferences_tab = tabview.tab("Preferences")
 remote_tab = tabview.tab("Remote")
 search_tab = tabview.tab("Search")
 grid_browser_tab = tabview.tab("Grid Browser")
+channel_browser_tab = tabview.tab("Channel Browser")
+favourites_tab = tabview.tab("Favourites")
 
 def browse_application():
     file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
@@ -154,5 +156,19 @@ query_label.pack(side="left", padx=5)
 
 query_entry = ctk.CTkEntry(bottom_frame)
 query_entry.pack(side="left", padx=5, fill="x", expand=True)
+
+query_frame_channel = ctk.CTkFrame(channel_browser_tab)
+query_frame_channel.pack(side="bottom", fill="x", padx=10, pady=10)
+query_label_channel = ctk.CTkLabel(query_frame_channel, text="Query")
+query_label_channel.pack(side="left", padx=5)
+query_entry_channel = ctk.CTkEntry(query_frame_channel)
+query_entry_channel.pack(side="left", padx=5, fill="x", expand=True)
+
+query_frame_favourites = ctk.CTkFrame(favourites_tab)
+query_frame_favourites.pack(side="bottom", fill="x", padx=10, pady=10)
+query_label_favourites = ctk.CTkLabel(query_frame_favourites, text="Query")
+query_label_favourites.pack(side="left", padx=5)
+query_entry_favourites = ctk.CTkEntry(query_frame_favourites)
+query_entry_favourites.pack(side="left", padx=5, fill="x", expand=True)
 
 app.mainloop()
