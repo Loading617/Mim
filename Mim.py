@@ -2,10 +2,14 @@ import customtkinter as ctk
 import requests
 import re
 import os
+import webbrowser
 from tkinter import filedialog
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
+
+def open_link():
+    webbrowser.open("https://www.mim.com")
 
 app = ctk.CTk()
 app.title("Mim")
@@ -28,6 +32,7 @@ search_tab = tabview.tab("Search")
 grid_browser_tab = tabview.tab("Grid Browser")
 channel_browser_tab = tabview.tab("Channel Browser")
 favourites_tab = tabview.tab("Favourites")
+about_tab = tabview.tab("About")
 
 def browse_application():
     file_path = filedialog.askopenfilename(filetypes=[("Executable Files", "*.exe"), ("All Files", "*.*")])
@@ -244,6 +249,7 @@ reset_button.grid(row=11, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 preferences_tab.rowconfigure(8, weight=1)
 
 remote_tab.columnconfigure(0, weight=1)
+
 open_remote_button = ctk.CTkButton(remote_tab, text="Open Remote", command=open_remote)
 open_remote_button.pack(pady=20)
 
@@ -297,5 +303,16 @@ query_label_favourites = ctk.CTkLabel(query_frame_favourites, text="Query")
 query_label_favourites.pack(side="left", padx=5)
 query_entry_favourites = ctk.CTkEntry(query_frame_favourites)
 query_entry_favourites.pack(side="left", padx=5, fill="x", expand=True)
+
+label = ctk.CTkLabel(about_tab, text="Mim", font=("Verdana", 16))
+label.pack(pady=10)
+
+textbox = ctk.CTkTextbox(about_tab, width=300, height=100)
+textbox.insert("0.0", "")
+textbox.pack(pady=10)
+
+link = ctk.CTkLabel(about_tab, text="Mim.com", text_color="blue", cursor="hand2")
+link.pack(pady=5)
+link.bind("<Button-1>", lambda e: open_link())
 
 app.mainloop()
