@@ -250,6 +250,8 @@ preferences_tab.rowconfigure(8, weight=1)
 
 remote_tab.columnconfigure(0, weight=1)
 
+label_remote = ctk.CTkLabel(remote_tab, text="You can open the Remote by pressing the button below, by pressing Open Remote, a remote window will open. When it opens, you click the icon to return to the main window. And the remote, you are presented favorite channel buttons from 1 to 10.", font=("Verdana", 12, "bold"), padx=10, pady=10)
+
 open_remote_button = ctk.CTkButton(remote_tab, text="Open Remote", command=open_remote)
 open_remote_button.pack(pady=20)
 
