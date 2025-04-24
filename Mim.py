@@ -26,12 +26,12 @@ for tab_name in tabs:
 tabview.set("Preferences")
 tabview._segmented_button.configure(font=("Verdana", 8))
 
-preferences_tab = tabview.tab("Preferences")
-remote_tab = tabview.tab("Remote")
-search_tab = tabview.tab("Search")
 grid_browser_tab = tabview.tab("Grid Browser")
 channel_browser_tab = tabview.tab("Channel Browser")
 favourites_tab = tabview.tab("Favourites")
+preferences_tab = tabview.tab("Preferences")
+search_tab = tabview.tab("Search")
+remote_tab = tabview.tab("Remote")
 about_tab = tabview.tab("About")
 
 def browse_application():
