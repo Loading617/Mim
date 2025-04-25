@@ -2,6 +2,7 @@ import customtkinter as ctk
 import requests
 import re
 import os
+import sys
 import webbrowser
 from tkinter import filedialog
 
@@ -15,6 +16,9 @@ app = ctk.CTk()
 app.title("Mim")
 app.geometry("440x620")
 app.resizable(False, False)
+
+icon_path = resource_path("Mim_256x256.png")
+self.iconbitmap(icon_path)
 
 tabview = ctk.CTkTabview(app, width=420, height=580)
 tabview.pack(pady=10, padx=10, fill="both", expand=True)
@@ -318,5 +322,14 @@ textbox.pack(pady=10)
 link = ctk.CTkLabel(about_tab, text="Mim.com", text_color="blue", cursor="hand2")
 link.pack(pady=5)
 link.bind("<Button-1>", lambda e: open_link())
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for dev and for PyInstaller"""
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 app.mainloop()
