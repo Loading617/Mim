@@ -20,7 +20,7 @@ app.resizable(False, False)
 tabview = ctk.CTkTabview(app, width=420, height=580)
 tabview.pack(pady=10, padx=10, fill="both", expand=True)
 
-tabs = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "Remote", "About"]
+tabs = ["Grid Browser", "Channel Browser", "Favourites", "Preferences", "Search", "About"]
 for tab_name in tabs:
     tabview.add(tab_name)
 
@@ -32,7 +32,6 @@ channel_browser_tab = tabview.tab("Channel Browser")
 favourites_tab = tabview.tab("Favourites")
 preferences_tab = tabview.tab("Preferences")
 search_tab = tabview.tab("Search")
-remote_tab = tabview.tab("Remote")
 about_tab = tabview.tab("About")
 
 def browse_application():
@@ -54,7 +53,6 @@ def save_preferences():
     print("File Hierarchy:", entry_list_hierarchy.get())
     print("List URL:", entry_list_url.get())
     print("Show Window on Top:", check_var_top.get())
-    print("Start Mim with Remote:", check_var_remote.get())
 
 def reset_preferences():
     entry_player_location.delete(0, ctk.END)
@@ -62,7 +60,6 @@ def reset_preferences():
     entry_list_hierarchy.delete(0, ctk.END)
     entry_list_url.delete(0, ctk.END)
     check_var_top.set(0)
-    check_var_remote.set(0)
     
     for widget in scrollable_frame.winfo_children():
         widget.destroy()
@@ -198,9 +195,6 @@ if not os.path.exists(favourites_file):
 
 print(f"Favourites file created at: {favourites_file}")
 
-def open_remote():
-    print("Remote Opened!")
-
 preferences_tab.columnconfigure(0, weight=1)
 preferences_tab.columnconfigure(1, weight=1)
 preferences_tab.columnconfigure(2, weight=1)
@@ -240,23 +234,10 @@ check_var_top = ctk.IntVar()
 checkbox_top = ctk.CTkCheckBox(preferences_tab, text="Show Window on Top", variable=check_var_top)
 checkbox_top.grid(row=9, column=0, columnspan=3, padx=10, pady=5, sticky="w")
 
-check_var_remote = ctk.IntVar()
-checkbox_remote = ctk.CTkCheckBox(preferences_tab, text="Start Mim with Remote", variable=check_var_remote)
-checkbox_remote.grid(row=10, column=0, columnspan=3, padx=10, pady=5, sticky="w")
-
 reset_button = ctk.CTkButton(preferences_tab, text="Reset All Preferences", fg_color="red", hover_color="darkred", command=reset_preferences)
 reset_button.grid(row=11, column=0, columnspan=3, padx=10, pady=15, sticky="ew")
 
 preferences_tab.rowconfigure(8, weight=1)
-
-remote_tab.columnconfigure(0, weight=1)
-
-textbox = ctk.CTkTextbox(remote_tab, text="bold", width=300, height=100,)
-textbox.insert("0.0", "You can open the Remote by pressing the button below, by pressing Open Remote, a remote window will open. When it opens, you click the icon to return to the main window. And the remote, you are presented favorite channel buttons from 1 to 10.")
-textbox.pack(pady=10)
-
-open_remote_button = ctk.CTkButton(remote_tab, text="Open Remote", command=open_remote)
-open_remote_button.pack(pady=20)
 
 search_tab.columnconfigure(0, weight=1)
 
@@ -330,4 +311,5 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
