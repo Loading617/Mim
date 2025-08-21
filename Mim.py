@@ -1,6 +1,5 @@
 import customtkinter as ctk
 import requests
-import re
 import os
 import sys
 import webbrowser
@@ -311,5 +310,6 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
