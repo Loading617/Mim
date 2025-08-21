@@ -17,9 +17,6 @@ app.title("Mim")
 app.geometry("440x620")
 app.resizable(False, False)
 
-icon_path = resource_path("Mim_256x256.png")
-self.iconbitmap(icon_path)
-
 tabview = ctk.CTkTabview(app, width=420, height=580)
 tabview.pack(pady=10, padx=10, fill="both", expand=True)
 
@@ -333,3 +330,4 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
