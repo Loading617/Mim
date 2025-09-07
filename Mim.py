@@ -131,7 +131,7 @@ def add_url(url):
         update_grid_browser(channels)
         
 def browse_folder():
-    file_path = filedialog.askopenfilename(filetypes=[("M3U Playlist", "*.m3u"), ("M3U8 Playlist", "*.m3u8")])
+    file_path = filedialog.askopenfilename(filetypes=[("M3U Playlist", "*.m3u"), ("M3U8 Playlist", "*.m3u8"), ("XSPF Playlist", "*.xspf*")])
     if file_path:
         entry_list_hierarchy.delete(0, ctk.END)
         entry_list_hierarchy.insert(0, file_path)
@@ -310,6 +310,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
 
