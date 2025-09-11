@@ -1,9 +1,11 @@
 import customtkinter as ctk
 import requests
 import os
+import re
 import sys
 import webbrowser
 from tkinter import filedialog
+from tkinter import messagebox
 
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
@@ -310,6 +312,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
 
