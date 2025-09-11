@@ -148,77 +148,6 @@ def parse_m3u(content):
     
     return channels
 
-def update_grid_browser(channels):
-    """Update Grid Browser with channel names."""
-    for widget in grid_browser_frame.winfo_children():
-        widget.destroy()
-    
-    row, col = 0, 0
-    for name, url in channels:
-        label = ctk.CTkLabel(grid_browser_frame, text=name, padx=10, pady=5, fg_color="gray30")
-        label.grid(row=row, column=col, padx=5, pady=5)
-        
-        col += 1
-        if col >= 3:
-            col = 0
-            row += 1
-
-def add_url(url):
-    """Handles adding an M3U/M3U8 URL."""
-    content = fetch_m3u(url)
-    if content:
-        channels = parse_m3u(content)
-        update_grid_browser(channels)
-        
-def browse_folder():
-    file_path = filedialog.askopenfilename(filetypes=[("M3U Playlist", "*.m3u"), ("M3U8 Playlist", "*.m3u8"), ("XSPF Playlist", "*.xspf*")])
-    if file_path:
-        entry_list_hierarchy.delete(0, ctk.END)
-        entry_list_hierarchy.insert(0, file_path)
-        load_m3u_channels(file_path)
-
-def load_m3u_channels(file_path):
-    """Read M3U/M3U8 file and display URLs in the grid view."""
-    for widget in grid_browser_frame.winfo_children():
-        widget.destroy()
-
-    try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            lines = file.readlines()
-
-        urls = [line.strip() for line in lines if line.strip() and not line.startswith("#")]
-
-        row, col = 0, 0
-        for url in urls:
-            label = ctk.CTkLabel(grid_browser_frame, text=url, padx=5, pady=5, fg_color="gray30", corner_radius=5)
-            label.grid(row=row, column=col, padx=5, pady=5, sticky="ew")
-            col += 1
-            if col >= 3:
-                col = 0
-                row += 1
-
-    except Exception as e:
-        print("Error loading M3U file:", e)
-
-def add_url():
-    """Handles adding an M3U/M3U8 URL with a checkbox to enable/disable channels."""
-    url = entry_list_url.get().strip()
-    if not url:
-        return
-
-    check_var = ctk.IntVar()
-
-    def toggle_channels():
-        """Add or remove channels based on the checkbox state."""
-        if check_var.get():
-            content = fetch_m3u(url)
-            if content:
-                channels = parse_m3u(content)
-                update_grid_browser(channels)
-        else:
-            for widget in grid_browser_frame.winfo_children():
-                widget.destroy()
-
 downloads_path = os.path.join(os.path.expanduser("~"), "Downloads")
 
 mim_folder = os.path.join(downloads_path, "MimData")
@@ -350,6 +279,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
 
