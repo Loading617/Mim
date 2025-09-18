@@ -3,6 +3,7 @@ import requests
 import os
 import re
 import sys
+import subprocess
 import webbrowser
 from tkinter import filedialog
 from tkinter import messagebox
@@ -71,14 +72,14 @@ def update_grid_browser(channels):
     
     row, col = 0, 0
     for name, url in channels:
-        label = ctk.CTkLabel(
+        btn = ctk.Button(
             grid_browser_frame, 
             text=name, 
-            padx=10, pady=5, 
-            fg_color="gray30", 
-            corner_radius=5
+            command=lambda u=url: launch_channel(u),
+            width=120,
+            height=40
             )
-        label.grid(row=row, column=col, padx=5, pady=5)
+        btn.grid(row=row, column=col, padx=5, pady=5)
         
         col += 1
         if col >= 3:
@@ -147,6 +148,25 @@ def parse_m3u(content):
                 current_name = None
     
     return channels
+
+def launch_channel(url):
+    """Launch selected channel in external player."""
+    player = entry_player_location.get().strip()
+    params = entry_player_parameters.get().strip()
+
+    if not player:
+        messagebox.showerror("Player Not Set", "Please set your player location in Preferences.")
+        return
+
+    try:
+        cmd = [player]
+        if params:
+            cmd.extend(params.split())
+        cmd.append(url)
+        subprocess.Popen(cmd)
+        print(f"Launching: {' '.join(cmd)}")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to launch player:\n{e}")
 
 downloads_path = os.path.join(os.path.expanduser("~"), "Downloads")
 
@@ -279,6 +299,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
 
