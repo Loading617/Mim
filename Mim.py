@@ -67,6 +67,9 @@ def load_m3u_channels(file_path):
         print("Error loading M3U file:", e)
         
 def update_grid_browser(channels):
+    global all_channels
+    all_channels = channels
+    
     for widget in grid_browser_frame.winfo_children():
         widget.destroy()
     
@@ -80,6 +83,9 @@ def update_grid_browser(channels):
             height=40
             )
         btn.grid(row=row, column=col, padx=5, pady=5)
+
+        btn.bind("<Button-1>", lambda e, url=url: launch_channel(u))
+        btn.bind("<Button-3>", lambda e, name=n, url=url: channel_menu(e, n, u))
         
         col += 1
         if col >= 3:
@@ -299,6 +305,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
 
