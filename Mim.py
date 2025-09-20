@@ -44,7 +44,7 @@ def browse_application():
 
 def browse_folder():
     file_path = filedialog.askopenfilename(
-        filetypes=[("M3U Playlist", "*.m3u"), ("M3U8 Playlist", "*.m3u8"), ("XSPF Playlist", "*.xspf")]
+        filetypes=[("M3U Playlist", "*.m3u"), ("M3U8 Playlist", "*.m3u8") ("XSPF Playlist", "*.xspf")]
     )
     if file_path:
         entry_list_url.delete(0, ctk.END)
@@ -305,6 +305,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
+
 
 
 
