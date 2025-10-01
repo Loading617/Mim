@@ -5,7 +5,7 @@ import re
 import sys
 import subprocess
 import webbrowser
-from tkinter import filedialog
+from tkinter import filedialog 
 from tkinter import messagebox
 
 ctk.set_appearance_mode("System")
@@ -65,7 +65,31 @@ def load_m3u_channels(file_path):
         
     except Exception as e:
         print("Error loading M3U file:", e)
+    
+def search_action():
+    query = search_entry.get().strip().lower()
+    for widget in grid_frame.winfo_children():
+        widget.destroy()
         
+    if not query:
+        return
+    
+    matches = []
+    matches.extend([(n, u) for n, u in all_channels if query in n.lower()])
+    matches.extend([(n, u) for n, u in load_favourites() if query in n.lower()])
+    
+    if not matches:
+        label = ctk.CTkLabel(grid_frame, text="No matches found.", padx=10, pady=5)
+        label.grid(row=0, column=0, padx=5, pady=5)
+        
+        label.bind("<Button-1>", lambda e, u=url: launch_channel())
+        label.bind("<Button-3>", lambda e, name=n, url=url: channel_menu(e, n, u))
+        
+        col += 1
+        if col >= 3:
+            col = 0
+            row += 1
+
 def update_grid_browser(channels):
     global all_channels
     all_channels = channels
@@ -75,7 +99,7 @@ def update_grid_browser(channels):
     
     row, col = 0, 0
     for name, url in channels:
-        btn = ctk.Button(
+        btn = ctk.CTkButton(
             grid_browser_frame, 
             text=name, 
             command=lambda u=url: launch_channel(u),
@@ -83,7 +107,7 @@ def update_grid_browser(channels):
             height=40
             )
         btn.grid(row=row, column=col, padx=5, pady=5)
-
+        
         btn.bind("<Button-1>", lambda e, url=url: launch_channel(u))
         btn.bind("<Button-3>", lambda e, name=n, url=url: channel_menu(e, n, u))
         
@@ -91,7 +115,7 @@ def update_grid_browser(channels):
         if col >= 3:
             col = 0
             row += 1
-
+            
 def save_preferences():
     print("Preferences Saved!")
     print("Player Location:", entry_player_location.get())
@@ -126,6 +150,28 @@ def add_url():
         new_checkbox = ctk.CTkCheckBox(scrollable_frame, text=url)
         new_checkbox.pack(anchor="w", padx=5, pady=2)
         entry_list_url.delete(0, ctk.END)
+    if not url:
+        return
+    
+
+    check_var = ctk.IntVar(value=1)
+    
+def toggle_channels():
+    if check_var.get():
+        content = fetch_m3u(url)
+        if content:
+            channels = parse_m3u(content)
+            update_grid_browser(channels)
+    else:
+        for widget in grid_browser_frame.winfo_children():
+            widget.destroy()
+            
+new_checkbox = ctk.CTkCheckBox(scrollable_frame, text=url, variable=check_var, command=toggle_channels)
+new_checkbox.pack(anchor="w", padx=5, pady=2)
+
+entry_list_url.delete(0, ctk.END)
+
+toggle_channels()
 
 def fetch_m3u(url):
     try:
@@ -137,7 +183,7 @@ def fetch_m3u(url):
         return None
 
 def parse_m3u(content):
-    """Extracts channel names and URLs from M3U content."""
+    """Extracts channel names and URLs from M3U/M3U8 content."""
     channels = []
     lines = content.splitlines()
     current_name = None
@@ -145,14 +191,17 @@ def parse_m3u(content):
     for line in lines:
         line = line.strip()
         if line.startswith("#EXTINF"):
-            match = re.search(r'?,(.*)', line)
-            if match:
-                current_name = match.group(1)
+            
+            parts = line.split(",", 1)
+            if len(parts) > 1:
+                current_name = parts[1].strip()
         elif line and not line.startswith("#"):
             if current_name:
                 channels.append((current_name, line))
                 current_name = None
-    
+            else:
+                channels.append((line, line))
+
     return channels
 
 def launch_channel(url):
@@ -173,6 +222,40 @@ def launch_channel(url):
         print(f"Launching: {' '.join(cmd)}")
     except Exception as e:
         messagebox.showerror("Error", f"Failed to launch player:\n{e}")
+
+def load_favourites():
+    """Load favourites from file."""
+    favourites = []
+    try:
+        with open(favourites_file, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#"):
+                    parts = line.split("|", 1)
+                    if len(parts) == 2:
+                        favourites.append((parts[0], parts[1]))
+    except Exception as e:
+        print("Error loading favourites:", e)
+    return favourites
+
+
+def save_favourite(name, url):
+    """Append a favourite channel to file."""
+    try:
+        with open(favourites_file, "a", encoding="utf-8") as f:
+            f.write(f"{name}|{url}\n")
+        print(f"Added to favourites: {name}")
+    except Exception as e:
+        messagebox.showerror("Error", f"Failed to save favourite:\n{e}")
+
+def channel_menu(event, name, url):
+    """Right-click menu for channels."""
+    menu = ctk.CTkMenu(app, tearoff=0)
+    import tkinter as tk
+    menu = tk.Menu(app, tearoff=0)
+    menu.add_command(label="Play Channel", command=lambda: launch_channel(url))
+    menu.add_command(label="Add to Favourites", command=lambda: save_favourite(name, url))
+    menu.tk_popup(event.x_root, event.y_root)
 
 downloads_path = os.path.join(os.path.expanduser("~"), "Downloads")
 
@@ -305,13 +388,3 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 app.mainloop()
-
-
-
-
-
-
-
-
-
-
